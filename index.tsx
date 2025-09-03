@@ -176,6 +176,11 @@ Provide your response as a JSON array of objects, strictly following the provide
     const encodedQuery = encodeURIComponent(`${query} gif`);
     return `https://www.google.com/search?q=${encodedQuery}&tbm=isch&tbs=itp:animated`;
   };
+
+  const getPinterestSearchUrl = (query: string) => {
+    const encodedQuery = encodeURIComponent(`${query} gif`);
+    return `https://www.pinterest.com/search/pins/?q=${encodedQuery}`;
+  };
   
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -252,15 +257,26 @@ Provide your response as a JSON array of objects, strictly following the provide
                        <p className="card-timing">{formatTime(result.startTime)} - {formatTime(result.endTime)}</p>
                     )}
                     <p><strong>Scene:</strong> {result.scene}</p>
+                    <p><strong>Query:</strong> <em>{result.query}</em></p>
                   </div>
-                  <a
-                    href={getGoogleImageSearchUrl(result.query)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="find-gif-btn"
-                  >
-                    Find GIF
-                  </a>
+                  <div className="card-actions">
+                     <a
+                      href={getGoogleImageSearchUrl(result.query)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="search-btn"
+                    >
+                      Search Google
+                    </a>
+                    <a
+                      href={getPinterestSearchUrl(result.query)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="search-btn"
+                    >
+                      Search Pinterest
+                    </a>
+                  </div>
                 </div>
               ))}
             </div>
